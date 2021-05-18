@@ -1,0 +1,109 @@
+% This file does not need to be changed.
+% Last edit: 2021-05-11
+\input{Styles/NDUdocumentClass} 	% Set the document class and its parameters
+
+%%%% PACKAGES TO INCLUDE
+%% Graphics
+\usepackage{graphicx}					% Display jpgs, png, bmp, ...
+\usepackage{pgfplots}					% Render charts and graphs
+\pgfplotsset{width=7cm,compat=1.3}		% Size all charts the same
+\usepgfplotslibrary{units}
+\usepackage{pgf-pie}					% Pie charts
+\usepackage{pgfplotstable}				% Displays numerical tables
+\usepackage{tikz}						% Draw on figures
+\usepackage{smartdiagram}				% fancy diagrams
+\input{Styles/NDUdiagram}				% specify diagram style 
+\usepackage{pgfgantt}					% Gantt charts
+\usepackage[version=4]{mhchem}			% chemical formulae/equations
+\usepackage{chemfig}					% Draw molecules
+%% Citations and references - for details: Styles/NDUcitation.info
+%\usepackage[backend=biber,style=apa,urldate=comp]{biblatex} % Author-Year citations, APA style
+\usepackage[backend=biber,style=ieee,urldate=comp]{biblatex} % Numerical citations, IEEE style
+\addbibresource{Bibliography/references.bib}% bib-file(s) used for citation and bibliograpy
+\DefineBibliographyStrings{english}{urlseen={accessed}}% 'visited on' is changed to 'accessed'
+%% Font
+\usepackage[UTF8]{inputenc}	% to print accented letters
+\usepackage[T1]{fontenc}	% to type accented letters into the tex-files
+\usepackage{lmodern}		% To avoid bitmap fonts caused by previous lines
+%% Style in general
+\usepackage{scrlayer-scrpage}			% Page style: controlling headers and footers
+\usepackage[hidelinks]{hyperref}		% Clickable references (TOC, LOF, LOT, references)
+%\usepackage[allcolors=blue]{hyperref}	% All links in blue
+%\usepackage[ocgcolorlinks]{ocgx2}		% All links printed black | NOT WORKING YET!
+\usepackage[all]{hypcap}				% links anchors to beginning of all floats
+\usepackage[acronym,nomain,nonumberlist]{glossaries} 	% To list acronyms
+\usepackage{enumitem}									% Enumeration style change
+\setlist[itemize,enumerate]{noitemsep, topsep=0pt}		% No spacing at lists
+\usepackage{lipsum}										% Create dummy text
+\usepackage[onehalfspacing]{setspace}					% Set space between each line
+%% Evaluating floating point expressions
+\usepackage{xfp}	% \fpeval can be used for calculations
+%% For debugging
+%\usepackage{showframe}			% Shows the margins
+%\listfiles						% List the files used and their version numbers in the log file
+
+%%%% USER DEFINED MACROS
+\input{Macros/Definitions}		% Change content of cover page and authors names/IDs
+\input{Macros/NDUmacros}		% All other user defined macros
+
+%%%% CREATE ACRONYMS
+\makeglossaries					% Must be in preamble
+
+%%===================================================================
+%% D O C U M E N T   S T A R T S   H E R E
+%%
+%%%  Each capter is located in it's own folder
+%%%  File extension MUST be .tex  (Not explicitly mentioned here). 
+%%%  I M P O R T A N T : paths are Unix syntax:
+%%%  001/chapter instead of 001\chapter !!
+%%%  ALL PATHS ARE RELATIVE TO THIS FILE !!
+%%-------------------------------------------------------------------
+\begin{document}
+\sloppy% To avoid text reaching into the margins, also possible: \emergencystretch 3em
+
+\include{001-Cover/Cover}				%% DON'T CHANGE - Cover page 
+
+\input{Styles/NDUstyleFront}			%% DON'T CHANGE - set headings and numbering for front matters
+
+\include{002-FrontMatters/Abstract}		%% Write abstract
+
+\include{002-FrontMatters/Declaration}  %% DON'T CHANGE - Declaration to be signed by authors after print
+
+%% Write Acknowledgement and Dedication. Optional - delete/rename files if not required.
+\include{002-FrontMatters/Acknowledgement}
+\include{002-FrontMatters/Dedication}
+
+\singlespacing							%% For TOC only set normal spacing
+\tableofcontents						%% Print table of contents (TOC)
+\onehalfspacing							%% Bigger spacing for remaining document
+
+\listoftables							%% Print List of Tables
+\addcontentsline{toc}{chapter}{List of Tables}	%% Add List of Tables to TOC 
+
+\listoffigures							%% Print List of Figures
+\addcontentsline{toc}{chapter}{List of Figures}	%% Add List of Figures to TOC
+
+\include{003-Acronyms/Acronyms}			%% Define all abbreviations here
+\addcontentsline{toc}{chapter}{List of Symbols, Acronyms and Abbreviations}	%% Add Acronyms to TOC
+\printglossary[title={List of Symbols, Acronyms and Abbreviations}]	%% Print Acronyms
+\cleardoublepage						%% Make sure Acronyms stay in preamble
+
+\input{Styles/NDUstyleMain}				%% Set style (headings/numbering) for main part
+
+\include{100-Introduction/Introduction}	%% Write your introduction
+
+\include{200-Literature/Literature}		%% Present your literature review
+
+\include{300-Methodology/Methodology}	%% State your methodology
+
+\include{400-Results/Results}			%% Discuss your results
+
+\include{500-Conclusions/Conclusions}	%% Present conclusions and recommendations
+
+\printbibliography[heading=bibintoc,% 	%% List of References with entry in TOC
+                   %heading=bibnumbered, %% References in TOC and with chapter number
+                   title=References] 	%% Rename 'Bibliography' to 'References'
+
+\include{600-Appendices/Appendices}		%% Questionnaires, interview transcripts, detailed tables
+
+\end{document}   % No characters allowed after this line
