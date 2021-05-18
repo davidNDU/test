@@ -1,0 +1,37 @@
+%%%% All parameters are defined in Definitions.tex
+%%%% DO NOT CHANGE THIS FILE
+
+%%%% SET MARGINS FOR COVER
+%\renewcommand{\coverpagetopmargin}{3em}
+\renewcommand{\coverpageleftmargin}{6em}
+\renewcommand{\coverpagerightmargin}{6em}
+\renewcommand{\coverpagebottommargin}{3em}
+
+%%%% TITLE PAGE BEGIN
+\titlehead{
+	\begin{center}	
+		\includegraphics[width=0.7\linewidth]{001-Cover/NDU_Logo}
+		\vspace{1.0\baselineskip}
+		
+		\textsc{\Huge \Faculty}\\
+		\textsc{\LARGE \Department}
+		\vspace{1.0\baselineskip}
+		
+		\textsc{\LARGE \ThesisType}
+	\end{center}
+}
+
+\subject{Submitted in partial fulfilment of the requirements for the award of a degree of\\ \DegreeType{} of Ndejje University}
+
+\author
+{
+	\ShowAuthorAandB
+}
+
+\publishers{\parbox{\textwidth}{\centering Supervised by \SupervisorA, \SupervisorB}}  % Printing supervisors
+%%%% TITLE PAGE END
+
+\pagenumbering{Alph}	% avoids warning 'destination with the same identifier ...'
+
+\maketitle				% create title page
+\shipout\null			% make page after title page blank, no pagenumber
